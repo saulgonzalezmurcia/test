@@ -1,0 +1,185 @@
+---
+title: "Data wrangling"
+author: "Sandra Erdmann"
+date: "20/08/2018"
+output: html_document
+---
+```{r, loadLibraries}
+library(tidyverse)
+library(knitr)
+
+```
+## Section {.tabset}
+### Data wrangling
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+$$
+\mu=2
+$$
+
+
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+ $$
+ y\sim{\beta_0 + \beta x}
+ $$
+```{r add chunks}
+# this is a chunk, add it by clicking Insert and then R
+# name your chunks!
+```
+
+```{r}
+load(url("http://www.flutterbys.com.au/stats/downloads/data/manipulationDatasets.RData"))
+head(data.1)
+str(data.1)
+glimpse(data.1)
+
+library(knitr)
+# has to be implemented so that the function 'kable' runs
+kable(data.1)
+# creates a table called knit_asis
+as.tibble(nasa)
+# called tbl_df; like a dataframe, fits data in the space available and shows what else is present that won't be able to get displayed in the current resolution
+head(data.1,2)
+arrange(data.1,LAT)
+# sorting data in order of the latitude (=LAT)
+data.1%>%arrange(LAT)
+# other way to sort data
+data.1 %>% arrange(LAT) %>% kable
+# same thing, but combine to produce table, which is called piping
+data.1 %>%
+        arrange(LAT) %>%
+        kable()
+# again same thing, but different way to type and (nachvollziehen)
+data.1%>% arrange(-LAT) %>% kable
+# if you put minus, then it sorts latitude from high to low
+arrange(data.1, Cond,Temp)
+# here you sort first by condition and within that by temperature
+arrange(data.1, Between,Cond)
+arrange(data.1, Cond,Temp/LAT)
+# sorts first by condiditon and then by RATIO of Temp and latitude
+# default sorts in alphabetical order
+mutate(data.1,ratio=Temp/LAT)
+# to add or change a feature
+data.1 %>% mutate(ratio=Temp/LAT)
+# same function as ahead
+data.1 %>% mutate(Cond=recode_factor(Cond, 'L'='Low', 'M'="Medium", 'H'='High'))
+# to give names to abbreviations in the ORDER of how you put them!
+```
+### Manipulating factors
+
+```{r}
+data.1$Cond
+# to display the conditions
+data.3<-data.1
+data.3$Cond<- factor(data.3$Cond, levels=c('L','M','H'))
+data.3$Cond
+# change the order of the factors in the conditions
+data.3 %>% arrange(Cond)
+
+```
+
+```{r}
+## Subset columns
+head(data.3,2)
+select(data.3,Between, Plot, Cond, Time, Temp)
+# to only select these variables
+select(data.3, -LAT,-LONG)
+# to exclude columns
+select(data.3, contains('L'), contains('e'))
+# to select variables that contain L and e
+select(data.3, Temp, everything())
+# to choose a variable first and then the rest instead of writing all variables down
+head(nasa)
+select(nasa, lat, long, cloudhigh, cloudlow, cloudmid)
+select(nasa, lat, long, starts_with('cloud'))
+tikus[1:10,c(1:3,76,77)]
+# tikus is the name of a dataset; chose from to with :
+tikus %>% select('Pocillopora damicornis')
+args(mean)
+# args means argument
+rename(data.3, Condition=Cond, Temperature=Temp)
+# rename variables
+filter(data.3, Cond=='H')
+# == means true means that if it's there, then include, if it's false, so not there, exclude it or if cond equals to H then include, so true
+filter(data.3, Cond %in% c('H', 'M'))
+# %in% means the variable includes two or more characters
+# command shift m shortcut
+filter(data.3, Cond=='H' & Temp<25)
+# & or comma can be used equally
+head(data.3, 2)
+filter(data.3, Temp<20 & (LAT>20 | LONG<145))
+filter(data.3, Temp<20 & LAT>20 | LONG<145)
+# observe the difference of the outcome when using the function with or without brackets!
+data.3<-filter(data.1, Plot=='P1') %>% droplevels()
+# drop others levels that your didn't select when you filtered
+levels(data.3$Plot)
+head(data.1, 2)
+mutate(data.1, LL=LAT+LONG)
+mutate(data.1, logTemp=log(Temp))
+mutate_at(data.1, vars(Temp, LAT), funs(l=log)) %>% head()
+# add a row or column with chosen parameteres (vars) and what you want to do with it (funs log)
+mutate_if(data.1, is.numeric, funs(l=log, s=sqrt)) %>% head()
+# add a row or column if the data are numeric
+head(data.1, 2)
+summarise(data.1, MeanTemp=mean(Temp), VarTemp=var(Temp))
+# sumarrise your data
+SE = function(x) { sd(x)/sqrt(length(x))}
+# how to create a function
+# = and <- means the same here
+data.1 %>% group_by(Between, Plot) %>% mutate(Mean=mean(Temp), cTemp=Temp-Mean) %>%
+        kable(caption='Summary table for Pocillopora damicornis')
+# cTemp means to center your temperature data, which means to substract the mean from the temperate to observe the difference (delta) from the mean for each value
+#?kable
+# ? is used to look up a function in the help window
+#kable(caption='Summary table for Pocillopora damicornis')
+
+```
+### Reshaping data frames
+```{r}
+data.w
+data.w %>% gather(key=Time, value=Count, Time.0:Time.2) %>% head
+#
+data.l=data.w %>% gather(key=Time, value=Count, Time.0:Time.2)
+data.l %>% spread(key=Time, value=Count)
+```
+### Merging data sets
+```{r}
+inner_join(data.bio, data.chem)
+full_join(data.bio, data.chem)
+left_join(data.bio, data.chem)
+left_join(data.bio, data.chem)
+```
+### Mean cover of total Acropora abundance per year
+```{r}
+tikus %>% rename(`Acropora aspera`=`Acropera aspera`) %>% # correct typos
+gather(key=Species, value=Abundance,-time,-rep) %>% # to sort data in a certain order to use them for analysis
+mutate(Cover=Abundance/10) %>% # in order to convert abundance into cover divide by 10
+separate(Species,c('Genera','Species')) %>% #?
+group_by(time,rep,Genera) %>% # group certain data
+summarise(SumCover=sum(Cover)) %>% # summarise the cover data
+group_by(time,Genera) %>%
+summarise(Mean=mean(SumCover),
+          Var=var(SumCover)) %>% 
+top_n(3,Mean)
+```
