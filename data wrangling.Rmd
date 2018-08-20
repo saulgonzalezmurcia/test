@@ -5,9 +5,12 @@ date: "20/08/2018"
 output: html_document
 ---
 ```{r, loadLibraries}
+# install packages preferbly in R instead of RStudio to have only one location for a package
+# open R as an admin
+# this library contains the packages 'dplyr' and 'tidyr'
 library(tidyverse)
+# this library is to knit (export) your script as a PDF or html
 library(knitr)
-
 ```
 ## Section {.tabset}
 ### Data wrangling
@@ -44,7 +47,7 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
  y\sim{\beta_0 + \beta x}
  $$
 ```{r add chunks}
-# this is a chunk, add it by clicking Insert and then R
+# this is a chunk, add it by clicking Insert and then R or by a shortcut: control = alt = i
 # name your chunks!
 ```
 
@@ -86,8 +89,7 @@ data.1 %>% mutate(ratio=Temp/LAT)
 data.1 %>% mutate(Cond=recode_factor(Cond, 'L'='Low', 'M'="Medium", 'H'='High'))
 # to give names to abbreviations in the ORDER of how you put them!
 ```
-### Manipulating factors
-
+## Manipulating factors
 ```{r}
 data.1$Cond
 # to display the conditions
@@ -98,9 +100,8 @@ data.3$Cond
 data.3 %>% arrange(Cond)
 
 ```
-
-```{r}
 ## Subset columns
+```{r}
 head(data.3,2)
 select(data.3,Between, Plot, Cond, Time, Temp)
 # to only select these variables
@@ -111,8 +112,8 @@ select(data.3, contains('L'), contains('e'))
 select(data.3, Temp, everything())
 # to choose a variable first and then the rest instead of writing all variables down
 head(nasa)
-select(nasa, lat, long, cloudhigh, cloudlow, cloudmid)
-select(nasa, lat, long, starts_with('cloud'))
+select(nasa, lat, long, cloudhigh, cloudlow, cloudmid) %>% head
+select(nasa, lat, long, starts_with('cloud')) %>% head
 tikus[1:10,c(1:3,76,77)]
 # tikus is the name of a dataset; chose from to with :
 tikus %>% select('Pocillopora damicornis')
@@ -155,7 +156,7 @@ data.1 %>% group_by(Between, Plot) %>% mutate(Mean=mean(Temp), cTemp=Temp-Mean) 
 #kable(caption='Summary table for Pocillopora damicornis')
 
 ```
-### Reshaping data frames
+## Reshaping data frames
 ```{r}
 data.w
 data.w %>% gather(key=Time, value=Count, Time.0:Time.2) %>% head
@@ -163,14 +164,14 @@ data.w %>% gather(key=Time, value=Count, Time.0:Time.2) %>% head
 data.l=data.w %>% gather(key=Time, value=Count, Time.0:Time.2)
 data.l %>% spread(key=Time, value=Count)
 ```
-### Merging data sets
+## Merging data sets
 ```{r}
 inner_join(data.bio, data.chem)
 full_join(data.bio, data.chem)
 left_join(data.bio, data.chem)
 left_join(data.bio, data.chem)
 ```
-### Mean cover of total Acropora abundance per year
+## Mean cover of total Acropora abundance per year
 ```{r}
 tikus %>% rename(`Acropora aspera`=`Acropera aspera`) %>% # correct typos
 gather(key=Species, value=Abundance,-time,-rep) %>% # to sort data in a certain order to use them for analysis
