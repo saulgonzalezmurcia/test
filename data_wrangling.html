@@ -128,7 +128,14 @@ $(document).ready(function () {
 </div>
 
 
-<pre class="r"><code>library(tidyverse)</code></pre>
+<div id="basics" class="section level2">
+<h2>Basics</h2>
+<p>In order to upload data into R, you can use datasets from the following website, which contains tutorials, slides, etc.</p>
+<pre class="r"><code>load(url(&quot;http://www.flutterbys.com.au/stats/downloads/data/manipulationDatasets.RData&quot;))</code></pre>
+<p>Use the project tool to keep scripts with codes and running analysis in each single project.</p>
+<p>Install packages preferbly in R (open R as an admin) instead of RStudio to have maximum control of your packages, to have only one location for a package and to run updates properly. Write ‘sudo R’ into the terminal and enter the password of ? then type install.packages(‘tidyverse’)</p>
+<pre class="r"><code># this library contains the packages 'dplyr' and 'tidyr'
+library(tidyverse)</code></pre>
 <pre><code>## ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>## ✔ ggplot2 3.0.0     ✔ purrr   0.2.5
 ## ✔ tibble  1.4.2     ✔ dplyr   0.7.6
@@ -138,17 +145,32 @@ $(document).ready(function () {
 <pre><code>## ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>library(knitr)</code></pre>
+<pre class="r"><code># this library is to knit (export) your script as a PDF or html
+library(knitr)</code></pre>
+<pre class="r"><code># chunk = Datenblock;
+# add a chunk by clicking Insert and then R or by a shortcut: control = alt = i
+# name your chunks to keep track!
+# to run the codes in your chunks, remember to click on the green arrow = </code></pre>
+<p>By typing ‘##’ you can add a heading.</p>
+</div>
+<div id="regular-expressions" class="section level2">
+<h2>Regular expressions</h2>
+</div>
 <div id="section" class="section level2 tabset">
 <h2>Section</h2>
-<div id="data-wrangling" class="section level3">
-<h3>Data wrangling</h3>
+<p>Add {.tabset} after ‘section’ to create tabs; only works in interactive media (html) Type ‘###’ and your title to create a new tab.</p>
+<div id="git-and-github" class="section level3">
+<h3>GIT and GITHUB</h3>
+<p>GIT creates snapshots, called commits. After 30 days duplicational changes will get deleted. Newly configurate for each computer you use.</p>
+<p>gitignore: ignores items on a list that you don’t want to add to your repository. data/* lets you choose an entire folder to exclude</p>
+<p>Abbreviations: -a ‘name’ : active (spacing after the letter neccessary) -m ‘name’ : message</p>
+<p>Use GitHub to share with collaborators and to manage your repository. Username is not changeable. In R click on New Project and open Version Control</p>
+<p>To jump back in time there are three comands: checkout, which keeps your history and simply follows a new branch reset, which is dangerous, since it deletes everything irreversibly revert, which allows your to change the branch, but reverts the commits</p>
 </div>
-</div>
-<div id="r-markdown" class="section level2">
-<h2>R Markdown</h2>
-<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
+<div id="r-markdown" class="section level3">
+<h3>R Markdown</h3>
+<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents, i.e. a language. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
+<p>When you click the <strong>Knit</strong> button a document will be generated as an rmd (RMarkDown) file that includes both content as well as the output of any embedded R code chunks within the document. You can send it to others and embed an R code chunk like this:</p>
 <pre class="r"><code>summary(cars)</code></pre>
 <pre><code>##      speed           dist       
 ##  Min.   : 4.0   Min.   :  2.00  
@@ -157,10 +179,14 @@ $(document).ready(function () {
 ##  Mean   :15.4   Mean   : 42.98  
 ##  3rd Qu.:19.0   3rd Qu.: 56.00  
 ##  Max.   :25.0   Max.   :120.00</code></pre>
+<p>Click on R Markdown.</p>
+Basic functions are the following: <strong>name</strong> = bold word <strong>name</strong> = underlined word # = comment -item 1 = list items {name} = chunk name
+<html link>
+<p>= link html</p>
 </div>
-<div id="including-plots" class="section level2">
-<h2>Including Plots</h2>
-<p>You can also embed plots, for example:</p>
+<div id="including-plots" class="section level3">
+<h3>Including Plots</h3>
+<p>You can also embed plots (an equation), for example:</p>
 <p><span class="math display">\[
 \mu=2
 \]</span></p>
@@ -168,9 +194,11 @@ $(document).ready(function () {
 <p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot. <span class="math display">\[
  y\sim{\beta_0 + \beta x}
  \]</span></p>
-<pre class="r"><code># this is a chunk, add it by clicking Insert and then R or by a shortcut: control = alt = i
-# name your chunks!</code></pre>
-<pre class="r"><code>load(url(&quot;http://www.flutterbys.com.au/stats/downloads/data/manipulationDatasets.RData&quot;))
+</div>
+<div id="data-wrangling" class="section level3">
+<h3>Data wrangling</h3>
+<pre class="r"><code># wrangling = Gerangel, Gezerre</code></pre>
+<pre class="r"><code># displays your data
 head(data.1)</code></pre>
 <pre><code>##   Between Plot Cond Time     Temp      LAT     LONG
 ## 1      A1   P1    H    1 15.73546 17.25752 146.2397
@@ -179,7 +207,8 @@ head(data.1)</code></pre>
 ## 4      A1   P2    H    4 37.95281 18.41013 142.0585
 ## 5      A1   P2    M    1 25.29508 18.46762 144.0437
 ## 6      A1   P2    L    2 13.79532 20.38767 145.8359</code></pre>
-<pre class="r"><code>str(data.1)</code></pre>
+<pre class="r"><code># the function 'str' displays the structure of a dataframe
+str(data.1)</code></pre>
 <pre><code>## 'data.frame':    12 obs. of  7 variables:
 ##  $ Between: Factor w/ 2 levels &quot;A1&quot;,&quot;A2&quot;: 1 1 1 1 1 1 2 2 2 2 ...
 ##  $ Plot   : Factor w/ 4 levels &quot;P1&quot;,&quot;P2&quot;,&quot;P3&quot;,..: 1 1 1 2 2 2 3 3 3 4 ...
@@ -194,7 +223,8 @@ head(data.1)</code></pre>
 ##   ..$ dimnames:List of 2
 ##   .. ..$ Cond: chr  &quot;Cond=H&quot; &quot;Cond=M&quot; &quot;Cond=L&quot;
 ##   .. ..$ Plot: chr  &quot;Plot=P1&quot; &quot;Plot=P2&quot; &quot;Plot=P3&quot; &quot;Plot=P4&quot;</code></pre>
-<pre class="r"><code>glimpse(data.1)</code></pre>
+<pre class="r"><code># this function gives you a glimpse of your data
+glimpse(data.1)</code></pre>
 <pre><code>## Observations: 12
 ## Variables: 7
 ## $ Between &lt;fct&gt; A1, A1, A1, A1, A1, A1, A2, A2, A2, A2, A2, A2
@@ -204,8 +234,9 @@ head(data.1)</code></pre>
 ## $ Temp    &lt;dbl&gt; 15.73546, 23.83643, 13.64371, 37.95281, 25.29508, 13.7...
 ## $ LAT     &lt;dbl&gt; 17.25752, 14.07060, 20.74986, 18.41013, 18.46762, 20.3...
 ## $ LONG    &lt;dbl&gt; 146.2397, 144.8877, 144.6884, 142.0585, 144.0437, 145....</code></pre>
-<pre class="r"><code>library(knitr)
-# has to be implemented so that the function 'kable' runs
+<pre class="r"><code># this library has to be implemented so that the function 'kable' runs
+library(knitr)
+# kable creates a table
 kable(data.1)</code></pre>
 <table>
 <thead>
@@ -330,7 +361,7 @@ kable(data.1)</code></pre>
 </tr>
 </tbody>
 </table>
-<pre class="r"><code># creates a table called knit_asis
+<pre class="r"><code># a tibble called tbl_df is like a dataframe, fits data in the space available and shows what else is present that won't be able to get displayed in the current resolution
 as.tibble(nasa)</code></pre>
 <pre><code>## # A tibble: 41,472 x 11
 ##      lat  long month  year cloudhigh cloudlow cloudmid ozone pressure
@@ -347,27 +378,13 @@ as.tibble(nasa)</code></pre>
 ## 10  13.7 -114.     1  1995      21       26       16.5   250     1000
 ## # ... with 41,462 more rows, and 2 more variables: surftemp &lt;dbl&gt;,
 ## #   temperature &lt;dbl&gt;</code></pre>
-<pre class="r"><code># called tbl_df; like a dataframe, fits data in the space available and shows what else is present that won't be able to get displayed in the current resolution
-head(data.1,2)</code></pre>
+<pre class="r"><code># displaying the first two rows of your datasheet
+head(data.1, 2)</code></pre>
 <pre><code>##   Between Plot Cond Time     Temp      LAT     LONG
 ## 1      A1   P1    H    1 15.73546 17.25752 146.2397
 ## 2      A1   P1    M    2 23.83643 14.07060 144.8877</code></pre>
-<pre class="r"><code>arrange(data.1,LAT)</code></pre>
-<pre><code>##    Between Plot Cond Time     Temp      LAT     LONG
-## 1       A1   P1    M    2 23.83643 14.07060 144.8877
-## 2       A2   P4    L    4 25.89843 14.52130 144.1700
-## 3       A1   P1    H    1 15.73546 17.25752 146.2397
-## 4       A1   P2    H    4 37.95281 18.41013 142.0585
-## 5       A1   P2    M    1 25.29508 18.46762 144.0437
-## 6       A2   P4    M    3 37.11781 18.64913 142.2459
-## 7       A2   P3    M    4 29.38325 19.68780 144.7944
-## 8       A2   P4    H    2 18.94612 20.06427 144.8924
-## 9       A2   P3    H    3 26.87429 20.14244 147.7174
-## 10      A2   P3    L    1 27.75781 20.33795 145.7753
-## 11      A1   P2    L    2 13.79532 20.38767 145.8359
-## 12      A1   P1    L    3 13.64371 20.74986 144.6884</code></pre>
 <pre class="r"><code># sorting data in order of the latitude (=LAT)
-data.1%&gt;%arrange(LAT)</code></pre>
+arrange(data.1,LAT)</code></pre>
 <pre><code>##    Between Plot Cond Time     Temp      LAT     LONG
 ## 1       A1   P1    M    2 23.83643 14.07060 144.8877
 ## 2       A2   P4    L    4 25.89843 14.52130 144.1700
@@ -382,6 +399,21 @@ data.1%&gt;%arrange(LAT)</code></pre>
 ## 11      A1   P2    L    2 13.79532 20.38767 145.8359
 ## 12      A1   P1    L    3 13.64371 20.74986 144.6884</code></pre>
 <pre class="r"><code># other way to sort data
+data.1%&gt;%arrange(LAT)</code></pre>
+<pre><code>##    Between Plot Cond Time     Temp      LAT     LONG
+## 1       A1   P1    M    2 23.83643 14.07060 144.8877
+## 2       A2   P4    L    4 25.89843 14.52130 144.1700
+## 3       A1   P1    H    1 15.73546 17.25752 146.2397
+## 4       A1   P2    H    4 37.95281 18.41013 142.0585
+## 5       A1   P2    M    1 25.29508 18.46762 144.0437
+## 6       A2   P4    M    3 37.11781 18.64913 142.2459
+## 7       A2   P3    M    4 29.38325 19.68780 144.7944
+## 8       A2   P4    H    2 18.94612 20.06427 144.8924
+## 9       A2   P3    H    3 26.87429 20.14244 147.7174
+## 10      A2   P3    L    1 27.75781 20.33795 145.7753
+## 11      A1   P2    L    2 13.79532 20.38767 145.8359
+## 12      A1   P1    L    3 13.64371 20.74986 144.6884</code></pre>
+<pre class="r"><code># same thing, but %&gt;% combines sorting data and producing a table, which is called piping
 data.1 %&gt;% arrange(LAT) %&gt;% kable</code></pre>
 <table>
 <thead>
@@ -506,7 +538,7 @@ data.1 %&gt;% arrange(LAT) %&gt;% kable</code></pre>
 </tr>
 </tbody>
 </table>
-<pre class="r"><code># same thing, but combine to produce table, which is called piping
+<pre class="r"><code># again same thing, but different way to type and track (nachvollziehen)
 data.1 %&gt;%
         arrange(LAT) %&gt;%
         kable()</code></pre>
@@ -633,7 +665,7 @@ data.1 %&gt;%
 </tr>
 </tbody>
 </table>
-<pre class="r"><code># again same thing, but different way to type and (nachvollziehen)
+<pre class="r"><code># if you put minus, then it sorts latitude from high to low; old function was desc = descending
 data.1%&gt;% arrange(-LAT) %&gt;% kable</code></pre>
 <table>
 <thead>
@@ -758,7 +790,7 @@ data.1%&gt;% arrange(-LAT) %&gt;% kable</code></pre>
 </tr>
 </tbody>
 </table>
-<pre class="r"><code># if you put minus, then it sorts latitude from high to low
+<pre class="r"><code># here you sort first by condition and within that by temperature
 arrange(data.1, Cond,Temp)</code></pre>
 <pre><code>##    Between Plot Cond Time     Temp      LAT     LONG
 ## 1       A1   P1    H    1 15.73546 17.25752 146.2397
@@ -773,7 +805,7 @@ arrange(data.1, Cond,Temp)</code></pre>
 ## 10      A1   P2    M    1 25.29508 18.46762 144.0437
 ## 11      A2   P3    M    4 29.38325 19.68780 144.7944
 ## 12      A2   P4    M    3 37.11781 18.64913 142.2459</code></pre>
-<pre class="r"><code># here you sort first by condition and within that by temperature
+<pre class="r"><code># sorts data by between and then condition
 arrange(data.1, Between,Cond)</code></pre>
 <pre><code>##    Between Plot Cond Time     Temp      LAT     LONG
 ## 1       A1   P1    H    1 15.73546 17.25752 146.2397
@@ -788,7 +820,9 @@ arrange(data.1, Between,Cond)</code></pre>
 ## 10      A2   P4    L    4 25.89843 14.52130 144.1700
 ## 11      A2   P3    M    4 29.38325 19.68780 144.7944
 ## 12      A2   P4    M    3 37.11781 18.64913 142.2459</code></pre>
-<pre class="r"><code>arrange(data.1, Cond,Temp/LAT)</code></pre>
+<pre class="r"><code># sorts first by condiditon and then by RATIO of Temp and latitude
+# default sorts in alphabetical order
+arrange(data.1, Cond,Temp/LAT)</code></pre>
 <pre><code>##    Between Plot Cond Time     Temp      LAT     LONG
 ## 1       A1   P1    H    1 15.73546 17.25752 146.2397
 ## 2       A2   P4    H    2 18.94612 20.06427 144.8924
@@ -802,24 +836,8 @@ arrange(data.1, Between,Cond)</code></pre>
 ## 10      A2   P3    M    4 29.38325 19.68780 144.7944
 ## 11      A1   P1    M    2 23.83643 14.07060 144.8877
 ## 12      A2   P4    M    3 37.11781 18.64913 142.2459</code></pre>
-<pre class="r"><code># sorts first by condiditon and then by RATIO of Temp and latitude
-# default sorts in alphabetical order
-mutate(data.1,ratio=Temp/LAT)</code></pre>
-<pre><code>##    Between Plot Cond Time     Temp      LAT     LONG     ratio
-## 1       A1   P1    H    1 15.73546 17.25752 146.2397 0.9118033
-## 2       A1   P1    M    2 23.83643 14.07060 144.8877 1.6940594
-## 3       A1   P1    L    3 13.64371 20.74986 144.6884 0.6575328
-## 4       A1   P2    H    4 37.95281 18.41013 142.0585 2.0615173
-## 5       A1   P2    M    1 25.29508 18.46762 144.0437 1.3696989
-## 6       A1   P2    L    2 13.79532 20.38767 145.8359 0.6766499
-## 7       A2   P3    H    3 26.87429 20.14244 147.7174 1.3342121
-## 8       A2   P3    M    4 29.38325 19.68780 144.7944 1.4924594
-## 9       A2   P3    L    1 27.75781 20.33795 145.7753 1.3648282
-## 10      A2   P4    H    2 18.94612 20.06427 144.8924 0.9442713
-## 11      A2   P4    M    3 37.11781 18.64913 142.2459 1.9903240
-## 12      A2   P4    L    4 25.89843 14.52130 144.1700 1.7834793</code></pre>
 <pre class="r"><code># to add or change a feature
-data.1 %&gt;% mutate(ratio=Temp/LAT)</code></pre>
+mutate(data.1, ratio=Temp/LAT)</code></pre>
 <pre><code>##    Between Plot Cond Time     Temp      LAT     LONG     ratio
 ## 1       A1   P1    H    1 15.73546 17.25752 146.2397 0.9118033
 ## 2       A1   P1    M    2 23.83643 14.07060 144.8877 1.6940594
@@ -834,6 +852,21 @@ data.1 %&gt;% mutate(ratio=Temp/LAT)</code></pre>
 ## 11      A2   P4    M    3 37.11781 18.64913 142.2459 1.9903240
 ## 12      A2   P4    L    4 25.89843 14.52130 144.1700 1.7834793</code></pre>
 <pre class="r"><code># same function as ahead
+data.1 %&gt;% mutate(ratio=Temp/LAT)</code></pre>
+<pre><code>##    Between Plot Cond Time     Temp      LAT     LONG     ratio
+## 1       A1   P1    H    1 15.73546 17.25752 146.2397 0.9118033
+## 2       A1   P1    M    2 23.83643 14.07060 144.8877 1.6940594
+## 3       A1   P1    L    3 13.64371 20.74986 144.6884 0.6575328
+## 4       A1   P2    H    4 37.95281 18.41013 142.0585 2.0615173
+## 5       A1   P2    M    1 25.29508 18.46762 144.0437 1.3696989
+## 6       A1   P2    L    2 13.79532 20.38767 145.8359 0.6766499
+## 7       A2   P3    H    3 26.87429 20.14244 147.7174 1.3342121
+## 8       A2   P3    M    4 29.38325 19.68780 144.7944 1.4924594
+## 9       A2   P3    L    1 27.75781 20.33795 145.7753 1.3648282
+## 10      A2   P4    H    2 18.94612 20.06427 144.8924 0.9442713
+## 11      A2   P4    M    3 37.11781 18.64913 142.2459 1.9903240
+## 12      A2   P4    L    4 25.89843 14.52130 144.1700 1.7834793</code></pre>
+<pre class="r"><code># to give names to abbreviations in the ORDER of how you put them!
 data.1 %&gt;% mutate(Cond=recode_factor(Cond, 'L'='Low', 'M'=&quot;Medium&quot;, 'H'='High'))</code></pre>
 <pre><code>##    Between Plot   Cond Time     Temp      LAT     LONG
 ## 1       A1   P1   High    1 15.73546 17.25752 146.2397
@@ -848,21 +881,21 @@ data.1 %&gt;% mutate(Cond=recode_factor(Cond, 'L'='Low', 'M'=&quot;Medium&quot;,
 ## 10      A2   P4   High    2 18.94612 20.06427 144.8924
 ## 11      A2   P4 Medium    3 37.11781 18.64913 142.2459
 ## 12      A2   P4    Low    4 25.89843 14.52130 144.1700</code></pre>
-<pre class="r"><code># to give names to abbreviations in the ORDER of how you put them!</code></pre>
 </div>
-<div id="manipulating-factors" class="section level2">
-<h2>Manipulating factors</h2>
-<pre class="r"><code>data.1$Cond</code></pre>
+<div id="manipulating-factors" class="section level3">
+<h3>Manipulating factors</h3>
+<pre class="r"><code># to display the conditions
+data.1$Cond</code></pre>
 <pre><code>##  [1] H M L H M L H M L H M L
 ## Levels: H L M</code></pre>
-<pre class="r"><code># to display the conditions
+<pre class="r"><code># rename new datasheet
 data.3&lt;-data.1
+# change the order of the factors in the conditions
 data.3$Cond&lt;- factor(data.3$Cond, levels=c('L','M','H'))
 data.3$Cond</code></pre>
 <pre><code>##  [1] H M L H M L H M L H M L
 ## Levels: L M H</code></pre>
-<pre class="r"><code># change the order of the factors in the conditions
-data.3 %&gt;% arrange(Cond)</code></pre>
+<pre class="r"><code>data.3 %&gt;% arrange(Cond)</code></pre>
 <pre><code>##    Between Plot Cond Time     Temp      LAT     LONG
 ## 1       A1   P1    L    3 13.64371 20.74986 144.6884
 ## 2       A1   P2    L    2 13.79532 20.38767 145.8359
@@ -877,28 +910,14 @@ data.3 %&gt;% arrange(Cond)</code></pre>
 ## 11      A2   P3    H    3 26.87429 20.14244 147.7174
 ## 12      A2   P4    H    2 18.94612 20.06427 144.8924</code></pre>
 </div>
-<div id="subset-columns" class="section level2">
-<h2>Subset columns</h2>
-<pre class="r"><code>head(data.3,2)</code></pre>
+<div id="subset-columns" class="section level3">
+<h3>Subset columns</h3>
+<pre class="r"><code>head(data.3, 2)</code></pre>
 <pre><code>##   Between Plot Cond Time     Temp      LAT     LONG
 ## 1      A1   P1    H    1 15.73546 17.25752 146.2397
 ## 2      A1   P1    M    2 23.83643 14.07060 144.8877</code></pre>
-<pre class="r"><code>select(data.3,Between, Plot, Cond, Time, Temp)</code></pre>
-<pre><code>##    Between Plot Cond Time     Temp
-## 1       A1   P1    H    1 15.73546
-## 2       A1   P1    M    2 23.83643
-## 3       A1   P1    L    3 13.64371
-## 4       A1   P2    H    4 37.95281
-## 5       A1   P2    M    1 25.29508
-## 6       A1   P2    L    2 13.79532
-## 7       A2   P3    H    3 26.87429
-## 8       A2   P3    M    4 29.38325
-## 9       A2   P3    L    1 27.75781
-## 10      A2   P4    H    2 18.94612
-## 11      A2   P4    M    3 37.11781
-## 12      A2   P4    L    4 25.89843</code></pre>
 <pre class="r"><code># to only select these variables
-select(data.3, -LAT,-LONG)</code></pre>
+select(data.3,Between, Plot, Cond, Time, Temp)</code></pre>
 <pre><code>##    Between Plot Cond Time     Temp
 ## 1       A1   P1    H    1 15.73546
 ## 2       A1   P1    M    2 23.83643
@@ -913,6 +932,21 @@ select(data.3, -LAT,-LONG)</code></pre>
 ## 11      A2   P4    M    3 37.11781
 ## 12      A2   P4    L    4 25.89843</code></pre>
 <pre class="r"><code># to exclude columns
+select(data.3, -LAT,-LONG)</code></pre>
+<pre><code>##    Between Plot Cond Time     Temp
+## 1       A1   P1    H    1 15.73546
+## 2       A1   P1    M    2 23.83643
+## 3       A1   P1    L    3 13.64371
+## 4       A1   P2    H    4 37.95281
+## 5       A1   P2    M    1 25.29508
+## 6       A1   P2    L    2 13.79532
+## 7       A2   P3    H    3 26.87429
+## 8       A2   P3    M    4 29.38325
+## 9       A2   P3    L    1 27.75781
+## 10      A2   P4    H    2 18.94612
+## 11      A2   P4    M    3 37.11781
+## 12      A2   P4    L    4 25.89843</code></pre>
+<pre class="r"><code># to select variables that contain L and e
 select(data.3, contains('L'), contains('e'))</code></pre>
 <pre><code>##    Plot      LAT     LONG Between Time     Temp
 ## 1    P1 17.25752 146.2397      A1    1 15.73546
@@ -927,7 +961,7 @@ select(data.3, contains('L'), contains('e'))</code></pre>
 ## 10   P4 20.06427 144.8924      A2    2 18.94612
 ## 11   P4 18.64913 142.2459      A2    3 37.11781
 ## 12   P4 14.52130 144.1700      A2    4 25.89843</code></pre>
-<pre class="r"><code># to select variables that contain L and e
+<pre class="r"><code># to choose a variable first and then the rest instead of writing all variables down
 select(data.3, Temp, everything())</code></pre>
 <pre><code>##        Temp Between Plot Cond Time      LAT     LONG
 ## 1  15.73546      A1   P1    H    1 17.25752 146.2397
@@ -942,8 +976,7 @@ select(data.3, Temp, everything())</code></pre>
 ## 10 18.94612      A2   P4    H    2 20.06427 144.8924
 ## 11 37.11781      A2   P4    M    3 18.64913 142.2459
 ## 12 25.89843      A2   P4    L    4 14.52130 144.1700</code></pre>
-<pre class="r"><code># to choose a variable first and then the rest instead of writing all variables down
-head(nasa)</code></pre>
+<pre class="r"><code>head(nasa)</code></pre>
 <pre><code>##        lat   long month year cloudhigh cloudlow cloudmid ozone pressure
 ## 1 36.20000 -113.8     1 1995      26.0      7.5     34.5   304      835
 ## 2 33.70435 -113.8     1 1995      20.0     11.5     32.5   304      940
@@ -958,7 +991,8 @@ head(nasa)</code></pre>
 ## 4    289.3       290.7
 ## 5    292.2       292.7
 ## 6    294.1       293.6</code></pre>
-<pre class="r"><code>select(nasa, lat, long, cloudhigh, cloudlow, cloudmid) %&gt;% head</code></pre>
+<pre class="r"><code># type %&gt;% head after a function, which is too long, in order to avoid displaying the entire data sheet
+select(nasa, lat, long, cloudhigh, cloudlow, cloudmid) %&gt;% head</code></pre>
 <pre><code>##        lat   long cloudhigh cloudlow cloudmid
 ## 1 36.20000 -113.8      26.0      7.5     34.5
 ## 2 33.70435 -113.8      20.0     11.5     32.5
@@ -974,7 +1008,8 @@ head(nasa)</code></pre>
 ## 4 28.71304 -113.8      13.0     20.5     14.5
 ## 5 26.21739 -113.8       7.5     26.0     10.5
 ## 6 23.72174 -113.8       8.0     30.0      9.5</code></pre>
-<pre class="r"><code>tikus[1:10,c(1:3,76,77)]</code></pre>
+<pre class="r"><code># tikus is the name of a dataset; choose from to with :
+tikus[1:10,c(1:3,76,77)]</code></pre>
 <pre><code>##     Psammocora contigua Psammocora digitata Pocillopora damicornis time
 ## V1                    0                   0                     79   81
 ## V2                    0                   0                     51   81
@@ -997,8 +1032,7 @@ head(nasa)</code></pre>
 ## V8    8
 ## V9    9
 ## V10  10</code></pre>
-<pre class="r"><code># tikus is the name of a dataset; chose from to with :
-tikus %&gt;% select('Pocillopora damicornis')</code></pre>
+<pre class="r"><code>tikus %&gt;% select('Pocillopora damicornis')</code></pre>
 <pre><code>##     Pocillopora damicornis
 ## V1                      79
 ## V2                      51
@@ -1060,10 +1094,11 @@ tikus %&gt;% select('Pocillopora damicornis')</code></pre>
 ## V58                      0
 ## V59                     30
 ## V60                      0</code></pre>
-<pre class="r"><code>args(mean)</code></pre>
+<pre class="r"><code># args means argument
+args(mean)</code></pre>
 <pre><code>## function (x, ...) 
 ## NULL</code></pre>
-<pre class="r"><code># args means argument
+<pre class="r"><code># rename variables
 rename(data.3, Condition=Cond, Temperature=Temp)</code></pre>
 <pre><code>##    Between Plot Condition Time Temperature      LAT     LONG
 ## 1       A1   P1         H    1    15.73546 17.25752 146.2397
@@ -1078,14 +1113,15 @@ rename(data.3, Condition=Cond, Temperature=Temp)</code></pre>
 ## 10      A2   P4         H    2    18.94612 20.06427 144.8924
 ## 11      A2   P4         M    3    37.11781 18.64913 142.2459
 ## 12      A2   P4         L    4    25.89843 14.52130 144.1700</code></pre>
-<pre class="r"><code># rename variables
+<pre class="r"><code># == means true means that if it's there, then include, if it's false, so not there, exclude it or if cond equals to H then include, so true
 filter(data.3, Cond=='H')</code></pre>
 <pre><code>##   Between Plot Cond Time     Temp      LAT     LONG
 ## 1      A1   P1    H    1 15.73546 17.25752 146.2397
 ## 2      A1   P2    H    4 37.95281 18.41013 142.0585
 ## 3      A2   P3    H    3 26.87429 20.14244 147.7174
 ## 4      A2   P4    H    2 18.94612 20.06427 144.8924</code></pre>
-<pre class="r"><code># == means true means that if it's there, then include, if it's false, so not there, exclude it or if cond equals to H then include, so true
+<pre class="r"><code># %in% means the variable includes two or more characters
+# command shift m shortcut
 filter(data.3, Cond %in% c('H', 'M'))</code></pre>
 <pre><code>##   Between Plot Cond Time     Temp      LAT     LONG
 ## 1      A1   P1    H    1 15.73546 17.25752 146.2397
@@ -1096,18 +1132,17 @@ filter(data.3, Cond %in% c('H', 'M'))</code></pre>
 ## 6      A2   P3    M    4 29.38325 19.68780 144.7944
 ## 7      A2   P4    H    2 18.94612 20.06427 144.8924
 ## 8      A2   P4    M    3 37.11781 18.64913 142.2459</code></pre>
-<pre class="r"><code># %in% means the variable includes two or more characters
-# command shift m shortcut
+<pre class="r"><code># &amp; or comma can be used equally
 filter(data.3, Cond=='H' &amp; Temp&lt;25)</code></pre>
 <pre><code>##   Between Plot Cond Time     Temp      LAT     LONG
 ## 1      A1   P1    H    1 15.73546 17.25752 146.2397
 ## 2      A2   P4    H    2 18.94612 20.06427 144.8924</code></pre>
-<pre class="r"><code># &amp; or comma can be used equally
-head(data.3, 2)</code></pre>
+<pre class="r"><code>head(data.3, 2)</code></pre>
 <pre><code>##   Between Plot Cond Time     Temp      LAT     LONG
 ## 1      A1   P1    H    1 15.73546 17.25752 146.2397
 ## 2      A1   P1    M    2 23.83643 14.07060 144.8877</code></pre>
-<pre class="r"><code>filter(data.3, Temp&lt;20 &amp; (LAT&gt;20 | LONG&lt;145))</code></pre>
+<pre class="r"><code># observe the difference of the outcome when using the function with or without brackets!
+filter(data.3, Temp&lt;20 &amp; (LAT&gt;20 | LONG&lt;145))</code></pre>
 <pre><code>##   Between Plot Cond Time     Temp      LAT     LONG
 ## 1      A1   P1    L    3 13.64371 20.74986 144.6884
 ## 2      A1   P2    L    2 13.79532 20.38767 145.8359
@@ -1123,9 +1158,9 @@ head(data.3, 2)</code></pre>
 ## 7      A2   P4    H    2 18.94612 20.06427 144.8924
 ## 8      A2   P4    M    3 37.11781 18.64913 142.2459
 ## 9      A2   P4    L    4 25.89843 14.52130 144.1700</code></pre>
-<pre class="r"><code># observe the difference of the outcome when using the function with or without brackets!
+<pre class="r"><code># drop others levels that you didn't select when you filtered
 data.3&lt;-filter(data.1, Plot=='P1') %&gt;% droplevels()
-# drop others levels that your didn't select when you filtered
+
 levels(data.3$Plot)</code></pre>
 <pre><code>## [1] &quot;P1&quot;</code></pre>
 <pre class="r"><code>head(data.1, 2)</code></pre>
@@ -1160,7 +1195,8 @@ levels(data.3$Plot)</code></pre>
 ## 10      A2   P4    H    2 18.94612 20.06427 144.8924 2.941599
 ## 11      A2   P4    M    3 37.11781 18.64913 142.2459 3.614097
 ## 12      A2   P4    L    4 25.89843 14.52130 144.1700 3.254182</code></pre>
-<pre class="r"><code>mutate_at(data.1, vars(Temp, LAT), funs(l=log)) %&gt;% head()</code></pre>
+<pre class="r"><code># add a row or column with chosen parameteres (vars) and what you want to do with it (funs log)
+mutate_at(data.1, vars(Temp, LAT), funs(l=log)) %&gt;% head()</code></pre>
 <pre><code>##   Between Plot Cond Time     Temp      LAT     LONG   Temp_l    LAT_l
 ## 1      A1   P1    H    1 15.73546 17.25752 146.2397 2.755917 2.848248
 ## 2      A1   P1    M    2 23.83643 14.07060 144.8877 3.171215 2.644088
@@ -1168,7 +1204,7 @@ levels(data.3$Plot)</code></pre>
 ## 4      A1   P2    H    4 37.95281 18.41013 142.0585 3.636343 2.912901
 ## 5      A1   P2    M    1 25.29508 18.46762 144.0437 3.230610 2.916019
 ## 6      A1   P2    L    2 13.79532 20.38767 145.8359 2.624329 3.014930</code></pre>
-<pre class="r"><code># add a row or column with chosen parameteres (vars) and what you want to do with it (funs log)
+<pre class="r"><code># add a row or column if the data are numeric
 mutate_if(data.1, is.numeric, funs(l=log, s=sqrt)) %&gt;% head()</code></pre>
 <pre><code>##   Between Plot Cond Time     Temp      LAT     LONG    Time_l   Temp_l
 ## 1      A1   P1    H    1 15.73546 17.25752 146.2397 0.0000000 2.755917
@@ -1184,18 +1220,20 @@ mutate_if(data.1, is.numeric, funs(l=log, s=sqrt)) %&gt;% head()</code></pre>
 ## 4 2.912901 4.956239 2.000000 6.160585 4.290703 11.91883
 ## 5 2.916019 4.970117 1.000000 5.029421 4.297397 12.00182
 ## 6 3.014930 4.982482 1.414214 3.714205 4.515271 12.07625</code></pre>
-<pre class="r"><code># add a row or column if the data are numeric
-head(data.1, 2)</code></pre>
+<pre class="r"><code>head(data.1, 2)</code></pre>
 <pre><code>##   Between Plot Cond Time     Temp      LAT     LONG
 ## 1      A1   P1    H    1 15.73546 17.25752 146.2397
 ## 2      A1   P1    M    2 23.83643 14.07060 144.8877</code></pre>
-<pre class="r"><code>summarise(data.1, MeanTemp=mean(Temp), VarTemp=var(Temp))</code></pre>
+<pre class="r"><code># sumarrise your data
+summarise(data.1, MeanTemp=mean(Temp), VarTemp=var(Temp))</code></pre>
 <pre><code>##   MeanTemp  VarTemp
 ## 1 24.68638 65.72792</code></pre>
-<pre class="r"><code># sumarrise your data
-SE = function(x) { sd(x)/sqrt(length(x))}
-# how to create a function
+<pre class="r"><code># how to create a function
 # = and &lt;- means the same here
+SE = function(x) { sd(x)/sqrt(length(x))}
+# cTemp means to center your temperature data, which means to substract the mean from the temperate to observe the difference (delta) from the mean for each value
+# ?'name of the function', for instance
+# ? kable is a function, which is used to look up a function in the help window
 data.1 %&gt;% group_by(Between, Plot) %&gt;% mutate(Mean=mean(Temp), cTemp=Temp-Mean) %&gt;%
         kable(caption='Summary table for Pocillopora damicornis')</code></pre>
 <table>
@@ -1348,20 +1386,18 @@ data.1 %&gt;% group_by(Between, Plot) %&gt;% mutate(Mean=mean(Temp), cTemp=Temp-
 </tr>
 </tbody>
 </table>
-<pre class="r"><code># cTemp means to center your temperature data, which means to substract the mean from the temperate to observe the difference (delta) from the mean for each value
-#?kable
-# ? is used to look up a function in the help window
-#kable(caption='Summary table for Pocillopora damicornis')</code></pre>
 </div>
-<div id="reshaping-data-frames" class="section level2">
-<h2>Reshaping data frames</h2>
+<div id="reshaping-data-frames" class="section level3">
+<h3>Reshaping data frames</h3>
 <pre class="r"><code>data.w</code></pre>
 <pre><code>##    Between Plot Time.0 Time.1 Time.2
 ## R1      A1   P1      8     14     14
 ## R2      A1   P2     10     12     11
 ## R3      A2   P3      7     11      8
 ## R4      A2   P4     11      9      2</code></pre>
-<pre class="r"><code>data.w %&gt;% gather(key=Time, value=Count, Time.0:Time.2) %&gt;% head</code></pre>
+<pre class="r"><code># 'gather' is used to change data to use for the analysis since the data are too big;
+# there is a certain way to put data into an analysis
+data.w %&gt;% gather(key=Time, value=Count, Time.0:Time.2) %&gt;% head</code></pre>
 <pre><code>##   Between Plot   Time Count
 ## 1      A1   P1 Time.0     8
 ## 2      A1   P2 Time.0    10
@@ -1369,8 +1405,8 @@ data.1 %&gt;% group_by(Between, Plot) %&gt;% mutate(Mean=mean(Temp), cTemp=Temp-
 ## 4      A2   P4 Time.0    11
 ## 5      A1   P1 Time.1    14
 ## 6      A1   P2 Time.1    12</code></pre>
-<pre class="r"><code>#
-data.l=data.w %&gt;% gather(key=Time, value=Count, Time.0:Time.2)
+<pre class="r"><code>data.l=data.w %&gt;% gather(key=Time, value=Count, Time.0:Time.2)
+# 'spread' is the opposite function to 'gather' in order to display the data in a publication
 data.l %&gt;% spread(key=Time, value=Count)</code></pre>
 <pre><code>##   Between Plot Time.0 Time.1 Time.2
 ## 1      A1   P1      8     14     14
@@ -1378,9 +1414,10 @@ data.l %&gt;% spread(key=Time, value=Count)</code></pre>
 ## 3      A2   P3      7     11      8
 ## 4      A2   P4     11      9      2</code></pre>
 </div>
-<div id="merging-data-sets" class="section level2">
-<h2>Merging data sets</h2>
-<pre class="r"><code>inner_join(data.bio, data.chem)</code></pre>
+<div id="merging-data-sets" class="section level3">
+<h3>Merging data sets</h3>
+<pre class="r"><code># missing values are excluded and residual values are merged when joining two datasheets
+inner_join(data.bio, data.chem)</code></pre>
 <pre><code>## Joining, by = c(&quot;Between&quot;, &quot;Plot&quot;, &quot;Subplot&quot;)</code></pre>
 <pre><code>##    Resp1 Resp2 Between Plot Subplot     Chem1     Chem2
 ## 1      8    18      A1   P1      S1  1.452878 0.8858208
@@ -1393,7 +1430,8 @@ data.l %&gt;% spread(key=Time, value=Count)</code></pre>
 ## 8     11    22      A3   P5     S10  2.002931 3.6043314
 ## 9      8    24      A3   P6     S11 12.326867 1.7763576
 ## 10     2    16      A3   P6     S12  4.014221 0.2255188</code></pre>
-<pre class="r"><code>full_join(data.bio, data.chem)</code></pre>
+<pre class="r"><code># merges all data, puts N/A for the missing values and displays them
+full_join(data.bio, data.chem)</code></pre>
 <pre><code>## Joining, by = c(&quot;Between&quot;, &quot;Plot&quot;, &quot;Subplot&quot;)</code></pre>
 <pre><code>##    Resp1 Resp2 Between Plot Subplot     Chem1     Chem2
 ## 1      8    18      A1   P1      S1  1.452878 0.8858208
@@ -1408,7 +1446,8 @@ data.l %&gt;% spread(key=Time, value=Count)</code></pre>
 ## 10     8    24      A3   P6     S11 12.326867 1.7763576
 ## 11     2    16      A3   P6     S12  4.014221 0.2255188
 ## 12    NA    NA      A1   P2      S3  1.178652 5.0780682</code></pre>
-<pre class="r"><code>left_join(data.bio, data.chem)</code></pre>
+<pre class="r"><code># includes the left datasheet (in this case data.bio) and includes them into the right datasheet (in this case data.chem)
+left_join(data.bio, data.chem)</code></pre>
 <pre><code>## Joining, by = c(&quot;Between&quot;, &quot;Plot&quot;, &quot;Subplot&quot;)</code></pre>
 <pre><code>##    Resp1 Resp2 Between Plot Subplot     Chem1     Chem2
 ## 1      8    18      A1   P1      S1  1.452878 0.8858208
@@ -1422,33 +1461,36 @@ data.l %&gt;% spread(key=Time, value=Count)</code></pre>
 ## 9     11    22      A3   P5     S10  2.002931 3.6043314
 ## 10     8    24      A3   P6     S11 12.326867 1.7763576
 ## 11     2    16      A3   P6     S12  4.014221 0.2255188</code></pre>
-<pre class="r"><code>left_join(data.bio, data.chem)</code></pre>
+<pre class="r"><code># does the same, but includes from the right to the left; you can also simply change the order of the datasheets
+right_join(data.bio, data.chem)</code></pre>
 <pre><code>## Joining, by = c(&quot;Between&quot;, &quot;Plot&quot;, &quot;Subplot&quot;)</code></pre>
 <pre><code>##    Resp1 Resp2 Between Plot Subplot     Chem1     Chem2
 ## 1      8    18      A1   P1      S1  1.452878 0.8858208
 ## 2     10    21      A1   P1      S2  3.266253 0.1800177
-## 3     11    23      A1   P2      S4 13.400350 1.5762780
-## 4     14    22      A2   P3      S5  3.779183 1.6222430
-## 5     12    24      A2   P3      S6  1.196657 4.2369184
-## 6     11    23      A2   P4      S7        NA        NA
+## 3     NA    NA      A1   P2      S3  1.178652 5.0780682
+## 4     11    23      A1   P2      S4 13.400350 1.5762780
+## 5     14    22      A2   P3      S5  3.779183 1.6222430
+## 6     12    24      A2   P3      S6  1.196657 4.2369184
 ## 7      9    20      A2   P4      S8  5.687807 2.9859003
 ## 8     14    11      A3   P5      S9  4.834518 4.1328919
 ## 9     11    22      A3   P5     S10  2.002931 3.6043314
 ## 10     8    24      A3   P6     S11 12.326867 1.7763576
 ## 11     2    16      A3   P6     S12  4.014221 0.2255188</code></pre>
 </div>
-<div id="mean-cover-of-total-acropora-abundance-per-year" class="section level2">
-<h2>Mean cover of total Acropora abundance per year</h2>
+<div id="mean-cover-of-total-acropora-abundance-per-year" class="section level3">
+<h3>Mean cover of total Acropora abundance per year</h3>
 <pre class="r"><code>tikus %&gt;% rename(`Acropora aspera`=`Acropera aspera`) %&gt;% # correct typos
 gather(key=Species, value=Abundance,-time,-rep) %&gt;% # to sort data in a certain order to use them for analysis
 mutate(Cover=Abundance/10) %&gt;% # in order to convert abundance into cover divide by 10
-separate(Species,c('Genera','Species')) %&gt;% #?
+separate(Species,c('Genera','Species')) %&gt;% # 'separate function?
+# sorts by groups for time, rep and genera
 group_by(time,rep,Genera) %&gt;% # group certain data
 summarise(SumCover=sum(Cover)) %&gt;% # summarise the cover data
 group_by(time,Genera) %&gt;%
 summarise(Mean=mean(SumCover),
           Var=var(SumCover)) %&gt;% 
-top_n(3,Mean)</code></pre>
+# top_n sorts the top 3 genera by the mean
+        top_n(3,Mean)</code></pre>
 <pre><code>## # A tibble: 18 x 4
 ## # Groups:   time [6]
 ##    time  Genera     Mean    Var
@@ -1471,6 +1513,7 @@ top_n(3,Mean)</code></pre>
 ## 16 88    Acropora   8.55 106.  
 ## 17 88    Montipora 11.8  644.  
 ## 18 88    Porites    9.84  41.4</code></pre>
+</div>
 </div>
 
 

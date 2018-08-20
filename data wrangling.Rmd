@@ -4,33 +4,93 @@ author: "Sandra Erdmann"
 date: "20/08/2018"
 output: html_document
 ---
+
+## Basics
+
+In order to upload data into R, you can use datasets from the following website, which contains tutorials, slides, etc.
+```{r load datasets from html link}
+# always load libraries in the beginning of a script to have access to all the codes in the following
+load(url("http://www.flutterbys.com.au/stats/downloads/data/manipulationDatasets.RData"))
+```
+
+Use the project tool to keep scripts with codes and running analysis in each single project.
+
+Install packages preferbly in R (open R as an admin) instead of RStudio to have maximum control of your packages, to have only one location for a package and to run updates properly.
+Write 'sudo R' into the terminal and enter the password of ? then type install.packages('tidyverse')
+
 ```{r, loadLibraries}
-# install packages preferbly in R instead of RStudio to have only one location for a package
-# open R as an admin
-# this library contains the packages 'dplyr' and 'tidyr'
-library(tidyverse)
 # this library is to knit (export) your script as a PDF or html
 library(knitr)
+# this library contains the packages 'dplyr' and 'tidyr'
+library(tidyverse)
 ```
+
+```{r add chunks}
+# chunk = Datenblock;
+# add a chunk by clicking Insert and then R or by a shortcut: control = alt = i
+# name your chunks to keep track!
+# to run the codes in your chunks, remember to click on the green arrow = run current chunk
+```
+By typing '##' you can add a heading.
+
+## Regular expressions
+
+V1 = V2 : equals
+V1 <- V2 : is assignes (zuweisen) or renames V1 to V2
+== : if true / Is it equal to?
+!= : false / Is it NOT equal to?
+< : smaller than
+> : bigger than
+<= : smaller equals to
+>= : bigger equals to
+| : or
+
 ## Section {.tabset}
-### Data wrangling
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
-## R Markdown
+Add {.tabset} after 'section' to create tabs; only works in interactive media (html)
+Type '###' and your title to create a new tab.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+### GIT and GITHUB
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+GIT creates snapshots, called commits. After 30 days duplicational changes will get deleted. Newly configurate for each computer you use.
+
+gitignore: ignores items on a list that you don't want to add to your repository.
+data/* lets you choose an entire folder to exclude
+
+Abbreviations:
+-a 'name' : active (spacing after the letter neccessary)
+-m 'name' : message
+
+Use GitHub to share with collaborators and to manage your repository. Username is not changeable.
+In R click on New Project and open Version Control
+
+To jump back in time there are three comands:
+checkout, which keeps your history and simply follows a new branch
+reset, which is dangerous, since it deletes everything irreversibly
+revert, which allows your to change the branch, but reverts the commits
+
+### R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents, i.e. a language. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated as an rmd (RMarkDown) file that includes both content as well as the output of any embedded R code chunks within the document. You can send it to others and embed an R code chunk like this:
 
 ```{r cars}
 summary(cars)
 ```
+Click on R Markdown.
 
-## Including Plots
+Basic functions are the following:
+**name** = bold word
+__name__ = underlined word
+# = comment
+-item 1 = list items
+{name} = chunk name
+<html link> = link html
 
-You can also embed plots, for example:
+### Including Plots
+
+You can also embed plots (an equation), for example:
 
 $$
 \mu=2
@@ -46,141 +106,187 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
  $$
  y\sim{\beta_0 + \beta x}
  $$
-```{r add chunks}
-# this is a chunk, add it by clicking Insert and then R or by a shortcut: control = alt = i
-# name your chunks!
+
+### Data wrangling
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r wrangling}
+# wrangling = Gerangel, Gezerre
 ```
 
-```{r}
-load(url("http://www.flutterbys.com.au/stats/downloads/data/manipulationDatasets.RData"))
+```{r organise data}
+# loads and displays your data
 head(data.1)
+# the function 'str' displays the structure of a dataframe
 str(data.1)
+# this function gives you a glimpse of your data
 glimpse(data.1)
+# fct are characters = variables
+# int are intages = whole numbers
+# dbl are doubles = decimals
+```
 
+```{r data wrangling}
+# this library has to be implemented so that the function 'kable' runs
 library(knitr)
-# has to be implemented so that the function 'kable' runs
+# kable creates a table
+# kable extra is able to change fonts, colors, etc. within the table
 kable(data.1)
-# creates a table called knit_asis
+# a tibble called tbl_df is like a dataframe, fits data in the space available and shows what else is present that won't be able to get displayed in the current resolution
 as.tibble(nasa)
-# called tbl_df; like a dataframe, fits data in the space available and shows what else is present that won't be able to get displayed in the current resolution
-head(data.1,2)
-arrange(data.1,LAT)
+# displaying the first two rows of your datasheet
+head(data.1, 2)
 # sorting data in order of the latitude (=LAT)
+arrange(data.1,LAT)
+# other way to sort data by latitude
 data.1%>%arrange(LAT)
-# other way to sort data
+# same thing, but %>% combines sorting data AND producing a table, which is called piping
 data.1 %>% arrange(LAT) %>% kable
-# same thing, but combine to produce table, which is called piping
+# again same thing, but different way to type and track (nachvollziehen)
 data.1 %>%
         arrange(LAT) %>%
         kable()
-# again same thing, but different way to type and (nachvollziehen)
+# if you put minus, then it sorts latitude from high to low; old function was desc = descending
 data.1%>% arrange(-LAT) %>% kable
-# if you put minus, then it sorts latitude from high to low
-arrange(data.1, Cond,Temp)
 # here you sort first by condition and within that by temperature
-arrange(data.1, Between,Cond)
-arrange(data.1, Cond,Temp/LAT)
+arrange(data.1, Cond,Temp)
+# sorts data by between and then condition
+arrange(data.1, Between,Cond) %>%
 # sorts first by condiditon and then by RATIO of Temp and latitude
 # default sorts in alphabetical order
-mutate(data.1,ratio=Temp/LAT)
+boxplot
+arrange(data.1, Cond,Temp/LAT)
 # to add or change a feature
-data.1 %>% mutate(ratio=Temp/LAT)
+mutate(data.1, ratio=Temp/LAT)
 # same function as ahead
-data.1 %>% mutate(Cond=recode_factor(Cond, 'L'='Low', 'M'="Medium", 'H'='High'))
+data.1 %>% mutate(ratio=Temp/LAT)
 # to give names to abbreviations in the ORDER of how you put them!
+data.1 %>% mutate(Cond=recode_factor(Cond, 'L'='Low', 'M'="Medium", 'H'='High'))
 ```
-## Manipulating factors
-```{r}
-data.1$Cond
+```{r slicing}
+# the slice function relates to the order of the rows or colums. Thus, it isn't recommended to use.
+```
+```{r lag and lead}
+#these functions swift values ahead of other values or after them
+#used for biological implications, such as prey and predator relations
+```
+
+
+
+### Manipulating factors
+
+```{r display variables}
 # to display the conditions
+data.1$Cond
+# rename new datasheet
 data.3<-data.1
+# change the order of the factors in the conditions
 data.3$Cond<- factor(data.3$Cond, levels=c('L','M','H'))
 data.3$Cond
-# change the order of the factors in the conditions
 data.3 %>% arrange(Cond)
-
 ```
-## Subset columns
+
+### Subset columns
+
 ```{r}
-head(data.3,2)
-select(data.3,Between, Plot, Cond, Time, Temp)
+head(data.3, 2)
 # to only select these variables
-select(data.3, -LAT,-LONG)
+select(data.3, Between, Plot, Cond, Time, Temp)
 # to exclude columns
-select(data.3, contains('L'), contains('e'))
+select(data.3, -LAT,-LONG)
 # to select variables that contain L and e
-select(data.3, Temp, everything())
+select(data.3, contains('L'), contains('e'))
 # to choose a variable first and then the rest instead of writing all variables down
+select(data.3, Temp, everything())
+
 head(nasa)
+# type %>% head after a function, which is too long, in order to avoid displaying the entire data sheet
 select(nasa, lat, long, cloudhigh, cloudlow, cloudmid) %>% head
 select(nasa, lat, long, starts_with('cloud')) %>% head
+# tikus is the name of a dataset; choose from to with :
 tikus[1:10,c(1:3,76,77)]
-# tikus is the name of a dataset; chose from to with :
 tikus %>% select('Pocillopora damicornis')
-args(mean)
 # args means argument
-rename(data.3, Condition=Cond, Temperature=Temp)
+args(mean)
 # rename variables
-filter(data.3, Cond=='H')
+rename(data.3, Condition=Cond, Temperature=Temp)
 # == means true means that if it's there, then include, if it's false, so not there, exclude it or if cond equals to H then include, so true
-filter(data.3, Cond %in% c('H', 'M'))
+filter(data.3, Cond=='H')
 # %in% means the variable includes two or more characters
 # command shift m shortcut
-filter(data.3, Cond=='H' & Temp<25)
+filter(data.3, Cond %in% c('H', 'M'))
 # & or comma can be used equally
+filter(data.3, Cond=='H' & Temp<25)
+
 head(data.3, 2)
+# observe the difference of the outcome when using the function with or without brackets!
 filter(data.3, Temp<20 & (LAT>20 | LONG<145))
 filter(data.3, Temp<20 & LAT>20 | LONG<145)
-# observe the difference of the outcome when using the function with or without brackets!
+# drop others levels that you didn't select when you filtered
 data.3<-filter(data.1, Plot=='P1') %>% droplevels()
-# drop others levels that your didn't select when you filtered
+
 levels(data.3$Plot)
 head(data.1, 2)
 mutate(data.1, LL=LAT+LONG)
 mutate(data.1, logTemp=log(Temp))
-mutate_at(data.1, vars(Temp, LAT), funs(l=log)) %>% head()
 # add a row or column with chosen parameteres (vars) and what you want to do with it (funs log)
-mutate_if(data.1, is.numeric, funs(l=log, s=sqrt)) %>% head()
+mutate_at(data.1, vars(Temp, LAT), funs(l=log)) %>% head()
 # add a row or column if the data are numeric
+mutate_if(data.1, is.numeric, funs(l=log, s=sqrt)) %>% head()
+
 head(data.1, 2)
-summarise(data.1, MeanTemp=mean(Temp), VarTemp=var(Temp))
 # sumarrise your data
-SE = function(x) { sd(x)/sqrt(length(x))}
+summarise(data.1, MeanTemp=mean(Temp), VarTemp=var(Temp))
 # how to create a function
 # = and <- means the same here
+SE = function(x) { sd(x)/sqrt(length(x))}
+# cTemp means to center your temperature data, which means to substract the mean from the temperate to observe the difference (delta) from the mean for each value
+# ?'name of the function', for instance
+# ? kable is a function, which is used to look up a function in the help window
 data.1 %>% group_by(Between, Plot) %>% mutate(Mean=mean(Temp), cTemp=Temp-Mean) %>%
         kable(caption='Summary table for Pocillopora damicornis')
-# cTemp means to center your temperature data, which means to substract the mean from the temperate to observe the difference (delta) from the mean for each value
-#?kable
-# ? is used to look up a function in the help window
-#kable(caption='Summary table for Pocillopora damicornis')
-
 ```
-## Reshaping data frames
+
+### Reshaping data frames
+
 ```{r}
 data.w
+# 'gather' is used to change data to use for the analysis since the data are too big;
+# there is a certain way to put data into an analysis
 data.w %>% gather(key=Time, value=Count, Time.0:Time.2) %>% head
-#
 data.l=data.w %>% gather(key=Time, value=Count, Time.0:Time.2)
+# 'spread' is the opposite function to 'gather' in order to display the data in a publication
 data.l %>% spread(key=Time, value=Count)
 ```
-## Merging data sets
+
+### Merging data sets
+
 ```{r}
+# missing values are excluded and residual values are merged when joining two datasheets
 inner_join(data.bio, data.chem)
+# merges all data, puts N/A for the missing values and displays them
 full_join(data.bio, data.chem)
+# includes the left datasheet (in this case data.bio) and includes them into the right datasheet (in this case data.chem)
 left_join(data.bio, data.chem)
-left_join(data.bio, data.chem)
+# does the same, but includes from the right to the left; you can also simply change the order of the datasheets
+right_join(data.bio, data.chem)
 ```
-## Mean cover of total Acropora abundance per year
+
+### Mean cover of total Acropora abundance per year
+
 ```{r}
 tikus %>% rename(`Acropora aspera`=`Acropera aspera`) %>% # correct typos
 gather(key=Species, value=Abundance,-time,-rep) %>% # to sort data in a certain order to use them for analysis
 mutate(Cover=Abundance/10) %>% # in order to convert abundance into cover divide by 10
-separate(Species,c('Genera','Species')) %>% #?
+separate(Species,c('Genera','Species')) %>% # 'separate function?
+# sorts by groups for time, rep and genera
 group_by(time,rep,Genera) %>% # group certain data
 summarise(SumCover=sum(Cover)) %>% # summarise the cover data
 group_by(time,Genera) %>%
 summarise(Mean=mean(SumCover),
           Var=var(SumCover)) %>% 
-top_n(3,Mean)
+# top_n sorts the top 3 genera by the mean
+        top_n(3,Mean)
 ```
