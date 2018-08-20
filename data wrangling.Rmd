@@ -5,6 +5,13 @@ date: "20/08/2018"
 output: html_document
 ---
 
+```{r, loadLibraries}
+# this library is to knit (export) your script as a PDF or html
+library(knitr)
+# this library contains the packages 'dplyr' and 'tidyr'
+library(tidyverse)
+```
+
 ## Basics
 
 In order to upload data into R, you can use datasets from the following website, which contains tutorials, slides, etc.
@@ -17,13 +24,6 @@ Use the project tool to keep scripts with codes and running analysis in each sin
 
 Install packages preferbly in R (open R as an admin) instead of RStudio to have maximum control of your packages, to have only one location for a package and to run updates properly.
 Write 'sudo R' into the terminal and enter the password of ? then type install.packages('tidyverse')
-
-```{r, loadLibraries}
-# this library is to knit (export) your script as a PDF or html
-library(knitr)
-# this library contains the packages 'dplyr' and 'tidyr'
-library(tidyverse)
-```
 
 ```{r add chunks}
 # chunk = Datenblock;
