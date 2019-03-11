@@ -1,1 +1,2 @@
 summary(x)
+mean(x)
